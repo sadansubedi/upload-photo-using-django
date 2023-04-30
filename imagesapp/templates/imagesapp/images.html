@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Images uploader</title>
+</head>
+<body>
+    <div class="container">
+        <div class="py-5 text-center bg-secondary text-white ">
+            <h1 class="mb-3">Upload Image</h1>
+            <form action="" method="POST" enctype="multipart/form-data"> <!--enctype="multipart/form-data" is also mandatory while working with images -->
+                {% csrf_token %}
+                {{form}}
+                <input type="submit" value="Upload" class="btn btn-success">
+            </form>
+        </div>
+        <div class="row">
+            {% for img in imgs %}
+            <div class="col-sm-4">
+                <div class="card m-2">
+                    <img src="{{img.photo.url}}" alt="" class="card-img-top" height="400px"> <!-- here img.photo.url,img refers from loop, photo comes from model(model ma j lekhexam tei hunxa hai) and url tkaes the images url from database ok -->
+                    <div class="card-footer">
+                        <small class="text-muted">{{img.date}}</small><!--here img.date comes from db(model.py)-->
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
